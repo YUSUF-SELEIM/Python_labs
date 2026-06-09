@@ -1,0 +1,43 @@
+first = input("enter first name: ")
+last = input("enter last name: ")
+print(last, first)
+
+n = int(input("enter a number: "))
+print(n + int(str(n) * 2) + int(str(n) * 3))
+
+print("""a string that you "don't" have to escape
+this
+is a ....... multi-line
+heredoc string --------> example""")
+
+import math
+r = 6
+print((4/3) * math.pi * r ** 3)
+
+base = float(input("enter base: "))
+height = float(input("enter height: "))
+print(0.5 * base * height)
+
+n = 5
+for i in range(1, n + 1):
+    print(("* " * i).rstrip())
+for i in range(n - 1, 0, -1):
+    print(("* " * i).rstrip())
+
+word = input("enter a word: ")
+print(word[::-1])
+
+for i in range(7):
+    if i != 3 and i != 6:
+        print(i, end=" ")
+
+a, b = 0, 1
+while a <= 50:
+    if a != 0:
+        print(a, end=" ")
+    a, b = b, a + b
+
+s = input("enter a string: ")
+digits = sum(c.isdigit() for c in s)
+letters = sum(c.isalpha() for c in s)
+print("digits:", digits, "letters:", letters)
