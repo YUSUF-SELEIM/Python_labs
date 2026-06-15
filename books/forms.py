@@ -1,0 +1,10 @@
+from django import forms
+from .models import Book
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title', 'desc', 'rate']
+        widgets = {
+            'desc': forms.Textarea(attrs={'rows': 4}),
+        }

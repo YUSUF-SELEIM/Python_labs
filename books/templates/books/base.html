@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Manager</title>
+    <style>
+        body { font-family: sans-serif; margin: 2rem; }
+        nav a { margin-right: 1rem; }
+        .messages { color: green; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'book_list' %}">Home</a>
+        <a href="{% url 'book_create' %}">Add Book</a>
+    </nav>
+    <hr>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+</body>
+</html>
