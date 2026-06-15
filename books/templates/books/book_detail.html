@@ -5,7 +5,7 @@
 <p><strong>Description:</strong> {{ book.desc }}</p>
 <p><strong>Rating:</strong> {{ book.rate }}</p>
 <p><strong>Views:</strong> {{ book.views }}</p>
-<a href="{% url 'book_update' book.pk %}">Edit</a> |
-<a href="{% url 'book_delete' book.pk %}">Delete</a> |
-<a href="{% url 'book_list' %}">Back to list</a>
+<a href="{% url 'books:book_update' book.pk %}">Edit</a> |
+<a href="{% url 'books:book_delete' book.pk %}">Delete</a> |
+<a href="{% url 'books:book_list' %}">Back to list</a>
 {% endblock %}

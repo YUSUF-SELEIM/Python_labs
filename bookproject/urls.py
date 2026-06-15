@@ -1,8 +1,11 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', include('books.urls')),
-    path('', include('books.urls')),  # optional: root also shows book list
+    path('book', RedirectView.as_view(url='/books/', permanent=False)),
+    path('book/', RedirectView.as_view(url='/books/', permanent=False)),
+    path('', RedirectView.as_view(url='/books/', permanent=False)),
 ]

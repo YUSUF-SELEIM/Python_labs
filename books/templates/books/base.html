@@ -10,8 +10,8 @@
 </head>
 <body>
     <nav>
-        <a href="{% url 'book_list' %}">Home</a>
-        <a href="{% url 'book_create' %}">Add Book</a>
+        <a href="{% url 'books:book_list' %}">Home</a>
+        <a href="{% url 'books:book_create' %}">Add Book</a>
     </nav>
     <hr>
     {% if messages %}

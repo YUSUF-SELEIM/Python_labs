@@ -6,6 +6,6 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
-    <a href="{% url 'book_list' %}">Cancel</a>
+    <a href="{% url 'books:book_list' %}">Cancel</a>
 </form>
 {% endblock %}
