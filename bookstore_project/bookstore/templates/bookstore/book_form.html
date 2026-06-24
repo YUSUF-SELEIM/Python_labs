@@ -1,0 +1,78 @@
+{% extends 'bookstore/base.html' %}
+
+{% block title %}{{ action }} Book — Bookstore{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'book_list' %}">Books</a></li>
+    {% if book %}<li class="breadcrumb-item"><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></li>{% endif %}
+    <li class="breadcrumb-item active">{{ action }}</li>
+  </ol>
+</nav>
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="bi bi-book me-2"></i>{{ action }} Book</h4>
+      </div>
+      <div class="card-body p-4">
+        {% if action == 'Create' %}
+        <div class="alert alert-info small">
+          <i class="bi bi-info-circle me-2"></i>
+          An <strong>ISBN will be auto-generated</strong> via signal when you save this book.
+        </div>
+        {% endif %}
+
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="{{ field.id_for_label }}">
+              {{ field.label }}
+              {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+            </label>
+
+            {% if field.name == 'categories' %}
+            <div class="border rounded p-3" style="max-height:180px;overflow-y:auto;">
+              {% for checkbox in field %}
+              <div class="form-check">
+                {{ checkbox.tag }} <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+              </div>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ field }}
+            {% endif %}
+
+            {% if field.help_text %}
+            <div class="form-text text-muted">{{ field.help_text }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+            <div class="text-danger small mt-1"><i class="bi bi-exclamation-circle me-1"></i>{{ error }}</div>
+            {% endfor %}
+          </div>
+          {% endfor %}
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+          </div>
+          {% endif %}
+
+          <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-check-circle me-1"></i>{{ action }} Book
+            </button>
+            <a href="{% if book %}{% url 'book_detail' book.pk %}{% else %}{% url 'book_list' %}{% endif %}" class="btn btn-outline-secondary">
+              Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
